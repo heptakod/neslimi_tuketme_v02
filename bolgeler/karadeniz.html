@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karadeniz Bölgesi'ndeki Nesli Tükenmekte Olan Canlılar</title>
+
+    <link rel="icon" href="../img/caretta.png" type="image/png"
+</head>
+<body>
+
+
+    <h1>Karadeniz Bölgesi</h1>
+    <p>Karadeniz Bölgesi'ndeki nesli tükenmekte olan canlıları keşfedin.</p>
+
+    <button id="AnaButonHayvanlar">Hayvanlar</button>
+    <div id="SeceneklerHayvanlar" style="display:none;">
+        <button class="SeceneklerHayvanlar">Omurgalılar</button>
+        <div id="AltSeceneklerOmurgalılar" style="display:none;">
+            <button class="AltSeceneklerOmurgalılar" data-url="../hayvanlar/omurgalılar/balıklar/karadeniz balıklar.html">Balıklar</button>
+            <button class="AltSeceneklerOmurgalılar" data-url="../hayvanlar/omurgalılar/memeliler/karadeniz memeliler.html">Memeliler</button>
+            <button class="AltSeceneklerOmurgalılar" data-url="../hayvanlar/omurgalılar/sürüngenler/karadeniz sürüngenler.html">Sürüngenler</button>
+            <button class="AltSeceneklerOmurgalılar" data-url="../hayvanlar/omurgalılar/kurbağalar/karadeniz kurbağalar.html">Kurbağalar</button>
+            <button class="AltSeceneklerOmurgalılar" data-url="../hayvanlar/omurgalılar/kuşlar/karadeniz kuşlar.html">Kuşlar</button>
+        </div>
+
+        <button class="SeceneklerHayvanlar">Omurgasızlar</button>
+        <div id="AltSeceneklerOmurgasızlar" style="display:none;">
+            <button class="AltSeceneklerOmurgasızlar" data-url="../hayvanlar/omurgasızlar/yumuşakçalar/karadeniz yumuşakçalar.html">Yumuşakçalar</button>
+            <button class="AltSeceneklerOmurgasızlar" data-url="../hayvanlar/omurgasızlar/süngerler/karadeniz süngerler.html">Süngerler</button>
+            <button class="AltSeceneklerOmurgasızlar" data-url="../hayvanlar/omurgasızlar/derisidikenliler/karadeniz derisidikenliler.html">Derisidikenliler</button>
+            <button class="AltSeceneklerOmurgasızlar" data-url="../hayvanlar/omurgasızlar/eklem bacaklılar/karadeniz eklem bacaklılar.html">Eklem Bacaklılar</button>
+            <button class="AltSeceneklerOmurgasızlar" data-url="../hayvanlar/omurgasızlar/solucanlar/karadeniz solucanlar.html">Solucanlar</button>
+            <button class="AltSeceneklerOmurgasızlar" data-url="../hayvanlar/omurgasızlar/sölenterler/karadeniz sölenterler.html">Sölenterler</button>
+        </div>
+    </div>
+
+
+
+
+    <button id="AnaButon">Bitkiler</button>
+    <div id="Secenekler" style="display:none;">
+        <button class="Secenekler">Damarlılar</button>
+        <div id="AltSecenekler" style="display:none;">
+            <button class="AltSecenekler" data-url="../bitkiler/damarlı/damarlı tohumsuz/karadeniz damarlı tohumsuz.html">Damarlı Tohumsuzlar</button>
+            <button class="AltSecenekler">Damarlı Tohumlular</button>
+            <div id="AltAltSecenekler" style="display:none;">
+                <button class="AltAltSecenekler">Kapalı Tohumlular</button>
+                <div id="AltAltAltSecenekler" style="display:none;">
+                    <button class="AltAltAltSecenekler" data-url="../bitkiler/damarlı/damarlı tohumlu/kapalı tohumlu/tek çenekliler/karadeniz tek çenekliler.html">Tek Çenekliler</button>
+                    <button class="AltAltAltSecenekler" data-url="../bitkiler/damarlı/damarlı tohumlu/kapalı tohumlu/çift çenekliler/karadeniz çift çenekliler.html">Çift Çenekliler</button>
+                </div>
+                <button class="AltAltSecenekler" data-url="../bitkiler/damarlı/damarlı tohumlu/açık tohumlu.html">Açık Tohumlular</button>
+            </div>
+        </div>
+        <button class="Secenekler" data-url="../bitkiler/damarsız/karadeniz damarsız.html">Damarsızlar</button>
+    </div>
+
+    <script>
+
+        document.getElementById("AnaButon").addEventListener("click", () => {
+            document.getElementById("Secenekler").style.display = "block";
+        });
+
+
+        document.querySelectorAll(".Secenekler").forEach(button => {
+            button.addEventListener("click", () => {
+                const selectedText = button.textContent.trim();
+
+                if (selectedText === "Damarlılar") {
+                    document.getElementById("AltSecenekler").style.display = "block";
+                } else if (selectedText === "Damarsızlar") {
+                    window.open(button.getAttribute("data-url"), "_blank");
+                }
+            });
+        });
+
+
+        document.querySelectorAll(".AltSecenekler").forEach(button => {
+            button.addEventListener("click", () => {
+                const selectedText = button.textContent.trim();
+
+                if (selectedText === "Damarlı Tohumsuzlar") {
+                    window.open(button.getAttribute("data-url"), "_blank");
+                } else if (selectedText === "Damarlı Tohumlular") {
+                    document.getElementById("AltAltSecenekler").style.display = "block";
+                }
+            });
+        });
+
+
+        document.querySelectorAll(".AltAltSecenekler").forEach(button => {
+            button.addEventListener("click", () => {
+                const selectedText = button.textContent.trim();
+
+                if (selectedText === "Açık Tohumlular") {
+                    window.open(button.getAttribute("data-url"), "_blank");
+                } else if (selectedText === "Kapalı Tohumlular") {
+                    document.getElementById("AltAltAltSecenekler").style.display = "block";
+                }
+            });
+        });
+
+
+        document.querySelectorAll(".AltAltAltSecenekler").forEach(button => {
+            button.addEventListener("click", () => {
+                window.open(button.getAttribute("data-url"), "_blank");
+            });
+        });
+
+        document.getElementById("AnaButonHayvanlar").addEventListener("click", function () {
+            document.getElementById("SeceneklerHayvanlar").style.display = "block";
+        });
+
+
+        document.querySelectorAll(".SeceneklerHayvanlar").forEach(function (button) {
+            button.addEventListener("click", function () {
+                const selectedText = button.textContent.trim();
+
+                if (selectedText === "Omurgalılar") {
+                    document.getElementById("AltSeceneklerOmurgalılar").style.display = "block";
+                    document.getElementById("AltSeceneklerOmurgasızlar").style.display = "none";
+                } else if (selectedText === "Omurgasızlar") {
+                    document.getElementById("AltSeceneklerOmurgasızlar").style.display = "block";
+                    document.getElementById("AltSeceneklerOmurgalılar").style.display = "none";
+                }
+            });
+        });
+
+
+        document.querySelectorAll(".AltSeceneklerOmurgalılar, .AltSeceneklerOmurgasızlar").forEach(function (button) {
+            button.addEventListener("click", function () {
+                const url = button.getAttribute("data-url");
+                window.open(url, "_blank");
+            });
+        });
+    </script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../css/bolgeler.css" rel="stylesheet" />
+    <title>Marmara Bölgesi'ndeki Nesli Tükenmekte Olan Canlılar</title>
+    
+</head>
+
+<body>
+
+    <div class="piramid-container">
+
+        <!-- Hayvanlar Butonu -->
+        <div class="piramid-kat hayvanlar">
+            <button onclick="toggleMain('hayvanlarBölmesi')">Hayvanlar</button>
+        </div>
+
+        <!-- Hayvanlar Bölmesi -->
+        <div id="hayvanlarBölmesi" class="hayvanlar-bolmesi">
+            <button onclick="toggleSub('omurgalilarAlt', ['omurgasizlarAlt'])">Omurgalılar</button>
+            <div id="omurgalilarAlt" class="alt-secenekler">
+                <button onclick="window.open('../hayvanlar/omurgalılar/kuşlar/marmara kuşlar.html')">Kuşlar</button>
+                <button onclick="window.open('../hayvanlar/omurgalılar/balıklar/marmara balıklar.html')">Balıklar</button>
+                <button onclick="window.open('../hayvanlar/omurgalılar/memeliler/marmara memeliler.html')">Memeliler</button>
+                <button onclick="window.open('../hayvanlar/omurgalılar/sürüngenler/marmara sürüngenler.html')">Sürüngenler</button>
+                <button onclick="window.open('../hayvanlar/omurgalılar/kurbağalar/marmara kurbağalar.html')">Kurbağalar</button>
+            </div>
+
+            <button onclick="toggleSub('omurgasizlarAlt', ['omurgalilarAlt'])">Omurgasızlar</button>
+            <div id="omurgasizlarAlt" class="alt-secenekler">
+                <button onclick="window.open('../hayvanlar/omurgasızlar/Yumuşakçalar/marmara yumuşakçalar.html')">Yumuşakçalar</button>
+                
+                <button onclick="window.open('../hayvanlar/omurgasızlar/Derisi Dikenliler/marmara derisi dikenliler.html')">Derisidikenliler</button>
+                <button onclick="window.open('../hayvanlar/omurgasızlar/Eklem Bacaklılar/marmara eklem bacaklılar.html')">Eklem Bacaklılar</button>
+                
+                <button onclick="window.open('../hayvanlar/omurgasızlar/Sölenterler/marmara sölenterler.html')">Sölenterler</button>
+            </div>
+        </div>
+
+        <!-- Bitkiler Butonu -->
+        <div class="piramid-kat bitkiler">
+            <button onclick="toggleMain('bitkilerBölmesi')">Bitkiler</button>
+        </div>
+
+        <!-- Bitkiler Bölmesi -->
+        <div id="bitkilerBölmesi" class="bitkiler-bolmesi">
+            <button onclick="toggleSub('damarlilarAlt', [])">Damarlılar</button>
+            <div id="damarlilarAlt" class="alt-secenekler">
+                <button onclick="window.open('../bitkiler/damarlı/damarlı tohumsuz/marmara damarlı tohumsuz.html')">Damarlı Tohumsuzlar</button>
+                <button onclick="toggleSub('tohumlularAlt', [])">Damarlı Tohumlular</button>
+                <div id="tohumlularAlt" class="alt-secenekler">
+                    <button onclick="window.open('../bitkiler/damarlı/damarlı tohumlu/açık tohumlu/marmara açık tohumlu.html')">Açık Tohumlular</button>
+                    <button onclick="toggleSub('kapaliTohumlularAlt', [])">Kapalı Tohumlular</button>
+                    <div id="kapaliTohumlularAlt" class="alt-secenekler">
+                        <button onclick="window.open('../bitkiler/damarlı/damarlı tohumlu/kapalı tohumlu/tek çenekliler/marmara tek çenekliler.html')">Tek Çenekliler</button>
+                        <button onclick="window.open('../bitkiler/damarlı/damarlı tohumlu/kapalı tohumlu/çift çenekliler/marmara çift çenekliler.html')">Çift Çenekliler</button>
+                    </div>
+                </div>
+            </div>
+            <button onclick="window.open('../bitkiler/damarsız/marmara damarsız.html')">Damarsızlar</button>
+        </div>
+    </div>
+
+    <script>
+        // Ana butonlar tıklanınca: diğer ana bölmeleri kapatır
+        function toggleMain(idToShow) {
+            const mainIds = ['hayvanlarBölmesi', 'bitkilerBölmesi'];
+            mainIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = (id === idToShow && el.style.display !== 'block') ? 'block' : 'none';
+            });
+
+            // Alt alt menüleri de kapat
+            const allSubMenus = document.querySelectorAll('.alt-secenekler');
+            allSubMenus.forEach(menu => menu.style.display = 'none');
+        }
+
+        // Alt butonlar tıklanınca sadece kendi altını açar, diğerlerini kapatır
+        function toggleSub(idToToggle, othersToClose = []) {
+            const el = document.getElementById(idToToggle);
+            if (!el) return;
+
+            const isVisible = el.style.display === 'block';
+
+            // Kapatılacaklar
+            othersToClose.forEach(id => {
+                const other = document.getElementById(id);
+                if (other) other.style.display = 'none';
+            });
+
+            // Aynı seviyedeki alt alt menüleri de kapatalım
+            const siblings = el.parentElement.querySelectorAll('.alt-secenekler');
+            siblings.forEach(sib => {
+                if (sib !== el) sib.style.display = 'none';
+            });
+
+            el.style.display = isVisible ? 'none' : 'block';
+        }
+    </script>
+
+</body>
+</html>
