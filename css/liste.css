@@ -1,0 +1,227 @@
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f3f4f6;
+            color: #111;
+        }
+
+        h1 {
+            /* text-align: center; */
+            margin: 120px 0;
+            font-size: 1.8rem;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+
+        }
+
+        #loading {
+            text-align: center;
+            font-size: 18px;
+            color: #555;
+            margin-top: 40px;
+        }
+
+        .spinner {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animal-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: none;
+            padding-top: 200px;
+            /* Increased top padding to accommodate bubbles */
+        }
+
+        .animal-card {
+            background-color: #fff;
+            border-radius: 16px;
+            position: relative;
+            transition: transform 0.2s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+        }
+
+        /* .animal-card:hover {
+            transform: translateY(-4px);
+        } */
+
+        .animal-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: 16px;
+            border-top-right-radius: 16px;
+        }
+
+        .animal-card .info {
+            padding: 12px;
+        }
+
+        .animal-card .info strong {
+            display: block;
+            font-size: 16px;
+        }
+
+        .animal-card .info small {
+            color: #666;
+        }
+
+        .hazard-label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 5px 10px;
+            font-weight: bold;
+            font-size: 12px;
+            color: white;
+            border-radius: 10px;
+        }
+
+        .hazard-NE {
+            background-color: #9e9e9e;
+        }
+
+        .hazard-DO {
+            background-color: #bdbdbd;
+        }
+
+        .hazard-LC {
+            background-color: #4caf50;
+        }
+
+        .hazard-NT {
+            background-color: #cdDC39;
+            color: black;
+        }
+
+        .hazard-VU {
+            background-color: #ffc107;
+            color: black;
+        }
+
+        .hazard-EN {
+            background-color: #ff9800;
+        }
+
+        .hazard-CR {
+            background-color: #f44336;
+        }
+
+        .hazard-EW {
+            background-color: #6a1b9a;
+        }
+
+        .info-bubble {
+            margin-bottom: 10px;
+            /* Space between bubble and card */
+            display: none;
+            position: absolute;
+            bottom: 97%;
+            /* Always position above */
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgb(229, 222, 103);
+            padding: 15px;
+            border-radius: 16px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            width: 260px;
+            text-align: justify;
+            z-index: 10;
+            border: 1px solid #ccc;
+            max-height: 150px;
+            /* Set max height */
+            overflow-y: auto;
+            /* Enable scrolling */
+        }
+
+        /* Create a container for the bubble content */
+        .bubble-content {
+            width: 100%;
+        }
+
+        .info-bubble-pointer {
+            position: absolute;
+            display: none;
+            bottom: calc(100% - 15px);
+            /* Position just 1px below bubble bottom for seamless connection */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 15px;
+            /* Made taller */
+            overflow: hidden;
+            z-index: 11;
+        }
+
+        /* Create the pointer triangle */
+        .info-bubble-pointer:after {
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: rgb(229, 222, 103);
+            transform: translateX(-50%) rotate(45deg);
+            top: -8px;
+            /* Adjusted to connect with bubble */
+            left: 50%;
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+            border-right: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .info-bubble::after,
+        .info-bubble::before {
+            display: none;
+            /* Remove the original pointers */
+        }
+
+        .animal-card.active .info-bubble,
+        .animal-card.active .info-bubble-pointer {
+            display: block;
+        }
+
+        .alphabet-bar {
+            position: fixed;
+            top: 10%;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .alphabet-bar a {
+            text-decoration: none;
+            font-size: 16px;
+            color: #333;
+            text-align: center;
+        }
+
+        .alphabet-bar a:hover {
+            color: #007BFF;
+        }
+
+        div.scroller {
+            scrollbar-color: rgb(148, 148, 147) rgb(229, 222, 103);
+        }
