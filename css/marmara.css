@@ -26,7 +26,7 @@ header {
 
 .overlay.header-strip {
     background: rgba(0, 0, 0, 0.0);
-    height: 16vh;
+    height: 150px;
     overflow: hidden;
     position: absolute;
     white-space: nowrap;
@@ -43,8 +43,8 @@ header {
 }
 
 .slider-track img {
-    height: 10vh;
-    width: 18vh;
+    height: 100px;
+    width: 150px;
     border-radius: 10px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s;
@@ -191,11 +191,11 @@ nav ul li a:hover {
 }
 
 .hero-text h1 {
-    font-size: 6vh;
+    font-size: 5em;
     margin: 0;
     /* background-color: rgba(69, 134, 75, 0.2); */
-    /* background-image: linear-gradient(to right, rgba(69, 134, 75, 0.4), rgba(69, 134, 75, 0.0)); */
-    padding: 1.5vh 2.8vh;
+    background-image: linear-gradient(to right, rgba(100, 79, 51, 0.4), rgba(69, 134, 75, 0.0));
+    padding: 30px 60px;
     margin-bottom: 10px;
     font-family: abrilFatface, Helvetica, sans-serif;
 
@@ -208,7 +208,7 @@ nav ul li a:hover {
 }
 
 .hero-text p {
-    font-size: 2.5vh;
+    font-size: 1.3em;
     margin-top: 10px;
 }
 
@@ -319,7 +319,7 @@ nav ul li a:hover {
     border: none;
     border-radius: 16px;
     padding: 10px 18px;
-    background: linear-gradient(135deg, #54e36c, #1ebd16);
+    background: linear-gradient(135deg, #60a5fa, #2563eb);
     color: white;
     font-size: 14px;
     margin: 6px;
@@ -328,7 +328,7 @@ nav ul li a:hover {
 }
 
 .panel button:hover {
-    background: linear-gradient(135deg, #54e36c, #1ebd16);
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
 }
 
 /* Each hierarchy level is its own horizontal row */
@@ -336,7 +336,7 @@ nav ul li a:hover {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-top: 10px;
+    margin-top: 20px;
     gap: 10px;
 }
 
@@ -348,8 +348,8 @@ button.selected {
 }
 
 .image-button {
-    width: 33vh;
-    height: 22vh;
+    width: 30vh;
+    height: 20vh;
     background-size: cover;
     background-position: center;
     border-radius: 16px;
@@ -366,6 +366,16 @@ button.selected {
     font-weight: bold;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
+
+/* Specific image backgrounds */
+#AnaButonHayvanlar {
+    background-image: url('../img/sazkedisi.jpg');
+}
+
+#AnaButon {
+    background-image: url('../img/acicigdem.webp');
+}
+
 
 .image-button:hover {
     transform: scale(1.03);
