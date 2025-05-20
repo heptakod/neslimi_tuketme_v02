@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marmara'daki Nesli Tükenmekte Olan Çift Çenekli Bitkiler</title>
+    <title>Akdeniz'deki Nesli Tükenmekte Olan Tek Çenekli Bitkiler</title>
     <style>
         .animal-list {
             max-height: 70vh;
@@ -134,7 +134,7 @@
 </head>
 <body>
 
-    <h1>Marmara'daki Nesli Tükenmekte Olan Çift Çenekli Bitkiler</h1>
+    <h1>Akdeniz'deki Nesli Tükenmekte Olan Tek Çenekli Bitkiler</h1>
     <div class="animal-list" id="animalList"></div>
 
     <div class="alphabet-bar">
@@ -169,7 +169,7 @@
     </div>
 
     <script>
-        const sheetURL = "https://script.google.com/macros/s/AKfycby3vNdMHW-afjVwMaCHDBRRrQA_zxKVW027pPvLUTY83DfK0U1c2b1f58DI2RCcyN_s/exec";
+        const sheetURL = "https://script.google.com/macros/s/AKfycbzm0n5ud5HpXRfiE_-5fuWutRz8BCKKKT_W3-zhsPQhlM18Uz0ajEme6-x5NMxLt_Ah5w/exec";
 
         fetch(sheetURL)
             .then(res => res.json())
@@ -183,16 +183,16 @@
                     card.setAttribute("data-name", animal.name);
 
                     card.innerHTML = `
-                        <img src="${animal.image}" alt="${animal.name}">
-                        <div class="hazard-label hazard-${animal["degree_of_hazard"]}">
-                             ${animal["degree_of_hazard"]}
-                        </div>
+                            <img src="${animal.image}" alt="${animal.name}">
+                            <div class="hazard-label hazard-${animal["degree_of_hazard"]}">
+                                 ${animal["degree_of_hazard"]}
+                            </div>
 
 
-                        <div><strong>${animal.name}</strong></div>
-                        <div><small>${animal.latin_name}</small></div>
-                        <div class="info-bubble">${animal.description}</div>
-                    `;
+                            <div><strong>${animal.name}</strong></div>
+                            <div><small>${animal.latin_name}</small></div>
+                            <div class="info-bubble">${animal.description}</div>
+                        `;
 
                     card.addEventListener("click", () => {
                         document.querySelectorAll(".animal-card.active").forEach(c => {
