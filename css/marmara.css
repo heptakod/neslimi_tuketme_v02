@@ -30,7 +30,7 @@ header {
     overflow: hidden;
     position: absolute;
     white-space: nowrap;
-    top: 48vh;
+    top: 43vh;
     border-radius: 10px;
     padding-top: 30px;
 }
@@ -194,7 +194,7 @@ nav ul li a:hover {
     font-size: 5em;
     margin: 0;
     /* background-color: rgba(69, 134, 75, 0.2); */
-    background-image: linear-gradient(to right, rgba(69, 134, 75, 0.4), rgba(69, 134, 75, 0.0));
+    background-image: linear-gradient(to right, rgba(100, 79, 51, 0.4), rgba(69, 134, 75, 0.0));
     padding: 30px 60px;
     margin-bottom: 10px;
     font-family: abrilFatface, Helvetica, sans-serif;
@@ -208,7 +208,7 @@ nav ul li a:hover {
 }
 
 .hero-text p {
-    font-size: 1.5em;
+    font-size: 1.3em;
     margin-top: 10px;
 }
 
@@ -369,11 +369,11 @@ button.selected {
 
 /* Specific image backgrounds */
 #AnaButonHayvanlar {
-    background-image: url('../img/hayvanlar_bear2.jpg');
+    background-image: url('../img/sazkedisi.jpg');
 }
 
 #AnaButon {
-    background-image: url('../img/bitkiler_tea.jpg');
+    background-image: url('../img/acicigdem.webp');
 }
 
 
