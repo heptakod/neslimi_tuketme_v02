@@ -1,4 +1,4 @@
-        body {
+﻿        body {
             font-family: Arial, sans-serif;
             margin: 0;
             background-color: #f3f4f6;
@@ -47,24 +47,30 @@
             padding: 20px;
             display: none;
             padding-top: 200px;
-            /* Increased top padding to accommodate bubbles */
+            
         }
 
-        .animal-card {
-            background-color: #fff;
-            border-radius: 16px;
-            position: relative;
-            transition: transform 0.2s ease;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-            cursor: pointer;
-        }
+.animal-card {
+    background-color: #fff;
+    border-radius: 16px;
+    position: relative;
+    transition: transform 0.2s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    border: 1px solid bisque;
+    padding: 0;
+    text-align: center;
+    margin: 20px;
+    width: 250px;
+
+}
 
         /* .animal-card:hover {
             transform: translateY(-4px);
         } */
 
         .animal-card img {
-            width: 100%;
+            width: 250px;
             height: 200px;
             object-fit: cover;
             border-top-left-radius: 16px;
