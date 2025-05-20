@@ -164,9 +164,6 @@
                 </div>
             </div>
 
-            <div class="level" id="Level-Bitkiler-1" style="display:none;">
-                <button class="Secenekler">Damarlılar</button>
-            </div>
 
             <div class="level" id="Level-Bitkiler-2-Damarlılar" style="display:none;">
                 <button class="AltSecenekler"
@@ -242,21 +239,10 @@
         document.getElementById("AnaButon").addEventListener("click", () => {
             const panel = document.getElementById("AnaButon").closest('.panel');
             resetPanel(panel);
-            toggleLevel("Level-Bitkiler-1");
+            toggleLevel("Level-Bitkiler-2-Damarlılar"); // artık direkt bu açılacak
         });
 
-        document.querySelectorAll(".Secenekler").forEach(button => {
-            button.addEventListener("click", () => {
-                const selected = button.textContent.trim();
-                selectExclusive(button, "level");
 
-                if (selected === "Damarlılar") {
-                    toggleLevel("Level-Bitkiler-2-Damarlılar");
-                } else if (selected === "Damarsızlar") {
-                    window.open(button.getAttribute("data-url"), "_blank");
-                }
-            });
-        });
 
         document.querySelectorAll(".AltSecenekler").forEach(button => {
             button.addEventListener("click", () => {

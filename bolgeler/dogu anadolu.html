@@ -162,9 +162,6 @@
                 </div>
             </div>
 
-            <div class="level" id="Level-Bitkiler-1" style="display:none;">
-                <button class="Secenekler">Damarlılar</button>
-            </div>
 
             <div class="level" id="Level-Bitkiler-2-Damarlılar" style="display:none;">
                 <button class="AltSecenekler"
@@ -239,7 +236,7 @@
         document.getElementById("AnaButon").addEventListener("click", () => {
             const panel = document.getElementById("AnaButon").closest('.panel');
             resetPanel(panel);
-            toggleLevel("Level-Bitkiler-1");
+            toggleLevel("Level-Bitkiler-2-Damarlılar"); 
         });
 
         document.querySelectorAll(".Secenekler").forEach(button => {
