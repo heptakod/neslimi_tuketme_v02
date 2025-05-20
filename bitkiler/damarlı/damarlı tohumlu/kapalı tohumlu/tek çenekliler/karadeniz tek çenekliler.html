@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Karadeniz'deki Nesli Tükenmekte Olan Tek Çenekli Bitkiler</title>
+    <link href="../../../../../css/liste.css" rel="stylesheet" />
+</head>
+
+
+<body>
+
+    <h1>Karadeniz'deki Nesli Tükenmekte Olan Tek Çenekli Bitkiler</h1>
+    <div id="loading">
+        <div class="spinner"></div>
+        Yükleniyor...
+    </div>
+
+    <div class="animal-list" id="animalList"></div>
+
+    <div class="alphabet-bar">
+        <a href="javascript:void(0);" data-letter="A">A</a>
+        <a href="javascript:void(0);" data-letter="B">B</a>
+        <a href="javascript:void(0);" data-letter="C">C</a>
+        <a href="javascript:void(0);" data-letter="Ç">Ç</a>
+        <a href="javascript:void(0);" data-letter="D">D</a>
+        <a href="javascript:void(0);" data-letter="E">E</a>
+        <a href="javascript:void(0);" data-letter="F">F</a>
+        <a href="javascript:void(0);" data-letter="G">G</a>
+        <a href="javascript:void(0);" data-letter="H">H</a>
+        <a href="javascript:void(0);" data-letter="I">I</a>
+        <a href="javascript:void(0);" data-letter="İ">İ</a>
+        <a href="javascript:void(0);" data-letter="J">J</a>
+        <a href="javascript:void(0);" data-letter="K">K</a>
+        <a href="javascript:void(0);" data-letter="L">L</a>
+        <a href="javascript:void(0);" data-letter="M">M</a>
+        <a href="javascript:void(0);" data-letter="N">N</a>
+        <a href="javascript:void(0);" data-letter="O">O</a>
+        <a href="javascript:void(0);" data-letter="Ö">Ö</a>
+        <a href="javascript:void(0);" data-letter="P">P</a>
+        <a href="javascript:void(0);" data-letter="R">R</a>
+        <a href="javascript:void(0);" data-letter="S">S</a>
+        <a href="javascript:void(0);" data-letter="Ş">Ş</a>
+        <a href="javascript:void(0);" data-letter="T">T</a>
+        <a href="javascript:void(0);" data-letter="U">U</a>
+        <a href="javascript:void(0);" data-letter="Ü">Ü</a>
+        <a href="javascript:void(0);" data-letter="V">V</a>
+        <a href="javascript:void(0);" data-letter="Y">Y</a>
+        <a href="javascript:void(0);" data-letter="Z">Z</a>
+    </div>
+
+
+    <script>
+        const sheetURL = "https://script.google.com/macros/s/AKfycbxqarUmqosWnN5mA-_1TApCF8wfRg7EblxOtOOdsmO6-cGeKIbQ62Xs5Qn820hN0cRa/exec";
+
+        fetch(sheetURL)
+            .then(res => res.json())
+            .then(data => {
+                const animalList = document.getElementById("animalList");
+                const loading = document.getElementById("loading");
+                loading.style.display = "none";
+                animalList.style.display = "grid";
+
+                data.forEach(animal => {
+                    const card = document.createElement("div");
+                    card.className = "animal-card";
+                    card.setAttribute("data-name", animal.name);
+
+                    card.innerHTML = `
+                                    <img src="${animal.image}" alt="${animal.name}">
+                                    <div class="hazard-label hazard-${animal["degree_of_hazard"]}">${animal["degree_of_hazard"]}</div>
+                                    <div class="info">
+                                      <strong>${animal.name}</strong>
+                                      <small>${animal.latin_name}</small>
+                                    </div>
+                                    <div class="info-bubble scroller">
+                                        <div class="bubble-content">${animal.description}</div>
+                                    </div>
+                                    <div class="info-bubble-pointer"></div>
+                                `;
+
+                    card.addEventListener("click", function () {
+                        document.querySelectorAll(".animal-card.active").forEach(c => {
+                            if (c !== card) c.classList.remove("active");
+                        });
+
+                        // Toggle active state
+                        this.classList.toggle("active");
+                    });
+
+                    animalList.appendChild(card);
+                });
+
+                // Initialize bubbles after cards are added
+                // No special initialization needed now
+            });
+        const alphabetLinks = document.querySelectorAll(".alphabet-bar a");
+        alphabetLinks.forEach(link => {
+            link.addEventListener("click", (e) => {
+                e.preventDefault();
+                const selectedLetter = e.target.getAttribute("data-letter");
+                filterItems(selectedLetter, document.querySelectorAll(".animal-card"));
+            });
+        });
+
+        function filterItems(letter, items) {
+            items.forEach(item => {
+                const itemName = item.getAttribute("data-name");
+                const firstLetter = itemName.charAt(0).toUpperCase();
+
+                if (firstLetter === letter) {
+                    item.style.display = "block";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        }
+
+
+    </script>
+
+</body>
+
+</html>
