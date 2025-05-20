@@ -1,137 +1,22 @@
-﻿<meta charset="UTF-8">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Akdeniz'deki Nesli Tükenmekte Olan Memeliler</title>
-<style>
-    .animal-list {
-        max-height: 70vh;
-        overflow-y: auto;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: flex-start;
-    }
+﻿<!DOCTYPE html>
+<html lang="tr">
 
-    .animal-card {
-        position: relative;
-        border: 1px solid bisque;
-        padding: 0;
-        text-align: center;
-        cursor: pointer;
-        margin: 20px;
-        width: 180px;
-    }
-
-        .animal-card img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-        }
-
-    .info-bubble {
-        display: none;
-        position: absolute;
-        top: -10px;
-        left: -10px;
-        transform: none;
-        background-color: #fff;
-        padding: 15px;
-        border: 1px solid cadetblue;
-        border-radius: 15px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        width: 250px;
-        max-width: 80vw;
-        text-align: left;
-        z-index: 100;
-    }
-
-
-
-    .animal-card.active .info-bubble {
-        display: block;
-    }
-
-    .alphabet-bar {
-        position: fixed;
-        top: 10%;
-        right: 10px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        max-height: 80vh;
-        overflow-y: auto;
-    }
-
-        .alphabet-bar a {
-            text-decoration: none;
-            font-size: 20px;
-            color: #333;
-            cursor: pointer;
-        }
-
-            .alphabet-bar a:hover {
-                color: #007BFF;
-            }
-
-    .hazard-label {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        font-weight: bold;
-        font-size: 20px;
-        color: white;
-        background-color: rgba(0,0,0,0.6);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-
-    .animal-card:hover .hazard-label {
-        opacity: 1;
-    }
-
-    .hazard-NE {
-        background-color: rgba(158,158,158,0.8);
-    }
-
-    .hazard-DO {
-        background-color: rgba(189,189,189,0.8);
-    }
-
-    .hazard-LC {
-        background-color: rgba(76,175,80,0.8);
-    }
-
-    .hazard-NT {
-        background-color: rgba(205,220,57,0.8);
-        color: black;
-    }
-
-    .hazard-VU {
-        background-color: rgba(255,193,7,0.8);
-        color: black;
-    }
-
-    .hazard-EN {
-        background-color: rgba(255,152,0,0.8);
-    }
-
-    .hazard-CR {
-        background-color: rgba(244,67,54,0.8);
-    }
-
-    .hazard-EW {
-        background-color: rgba(106,27,154,0.8);
-    }
-</style>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Akdeniz'deki Nesli Tükenmekte Olan Balıklar</title>
+    <link href="../../../css/liste.css" rel="stylesheet" />
 </head>
+
+
 <body>
 
-    <h1>Akdeniz'deki Nesli Tükenmekte Olan Memeliler</h1>
+    <h1>Akdeniz'deki Nesli Tükenmekte Olan Balıklar</h1>
+    <div id="loading">
+        <div class="spinner"></div>
+        Yükleniyor...
+    </div>
+
     <div class="animal-list" id="animalList"></div>
 
     <div class="alphabet-bar">
@@ -165,14 +50,17 @@
         <a href="javascript:void(0);" data-letter="Z">Z</a>
     </div>
 
+
     <script>
-        const sheetURL = "https://script.google.com/macros/s/AKfycbxs2tbo1QncAwBto0T88RYrTa9Lb14s503xgCVojjZznCi0eqjASBLa676y3rYmSX-2-w/exec";
+        const sheetURL = "https://script.google.com/macros/s/AKfycbw5dAuz9fNvtB-ZVW7FKn88sWrsDRb3O1s2rjn-cCxNn0gP8wtYuNLaeiWIMjsl4g7wSw/exec";
 
         fetch(sheetURL)
             .then(res => res.json())
             .then(data => {
-                console.log("Gelen veri:", data);
                 const animalList = document.getElementById("animalList");
+                const loading = document.getElementById("loading");
+                loading.style.display = "none";
+                animalList.style.display = "grid";
 
                 data.forEach(animal => {
                     const card = document.createElement("div");
@@ -180,28 +68,33 @@
                     card.setAttribute("data-name", animal.name);
 
                     card.innerHTML = `
-                        <img src="${animal.image}" alt="${animal.name}">
-                        <div class="hazard-label hazard-${animal["degree_of_hazard"]}">
-                             ${animal["degree_of_hazard"]}
-                        </div>
+                                        <img src="${animal.image}" alt="${animal.name}">
+                                        <div class="hazard-label hazard-${animal["degree_of_hazard"]}">${animal["degree_of_hazard"]}</div>
+                                        <div class="info">
+                                          <strong>${animal.name}</strong>
+                                          <small>${animal.latin_name}</small>
+                                        </div>
+                                        <div class="info-bubble scroller">
+                                            <div class="bubble-content">${animal.description}</div>
+                                        </div>
+                                        <div class="info-bubble-pointer"></div>
+                                    `;
 
-
-                        <div><strong>${animal.name}</strong></div>
-                        <div><small>${animal.latin_name}</small></div>
-                        <div class="info-bubble">${animal.description}</div>
-                    `;
-
-                    card.addEventListener("click", () => {
+                    card.addEventListener("click", function () {
                         document.querySelectorAll(".animal-card.active").forEach(c => {
                             if (c !== card) c.classList.remove("active");
                         });
-                        card.classList.toggle("active");
+
+                        // Toggle active state
+                        this.classList.toggle("active");
                     });
 
                     animalList.appendChild(card);
                 });
-            });
 
+                // Initialize bubbles after cards are added
+                // No special initialization needed now
+            });
         const alphabetLinks = document.querySelectorAll(".alphabet-bar a");
         alphabetLinks.forEach(link => {
             link.addEventListener("click", (e) => {
@@ -223,7 +116,10 @@
                 }
             });
         }
+
+
     </script>
 
 </body>
+
 </html>
