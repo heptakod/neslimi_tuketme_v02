@@ -98,6 +98,28 @@
 
             });
 
+        const alphabetLinks = document.querySelectorAll(".alphabet-bar a");
+        alphabetLinks.forEach(link => {
+            link.addEventListener("click", (e) => {
+                e.preventDefault();
+                const selectedLetter = e.target.getAttribute("data-letter");
+                filterItems(selectedLetter, document.querySelectorAll(".animal-card"));
+            });
+        });
+
+        function filterItems(letter, items) {
+            items.forEach(item => {
+                const itemName = item.getAttribute("data-name");
+                const firstLetter = itemName.charAt(0).toUpperCase();
+
+                if (firstLetter === letter) {
+                    item.style.display = "block";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        }
+
 
     </script>
 
