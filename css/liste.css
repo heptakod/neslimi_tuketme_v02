@@ -205,7 +205,7 @@
             position: absolute;
             width: 15px;
             height: 15px;
-            background: rgb(229, 222, 103);
+            background: rgb(210, 205, 99);
             transform: translateX(-50%) rotate(45deg);
             top: -8px;
             /* Adjusted to connect with bubble */
