@@ -9,8 +9,19 @@
 </head>
 <body>
 
+    <div id="videoPopup" class="popup">
+        <div class="popup-content">
+            <span class="close">&times;</span>
+            <video controls autoplay>
+                <source src="pop up.mp4" type="video/mp4">
+                Tarayıcınız video etiketini desteklemiyor.
+            </video>
+        </div>
+    </div>
+
+
     <header>
-       
+
         <div class="logo-title">
             <img src="img/caretta.png" alt="Logo">
             <h1>Neslimi Tüketme</h1>
@@ -125,6 +136,31 @@
                     alert("Lütfen aramak istediğiniz kelimeyi girin.");
                 }
             }
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const popup = document.getElementById("videoPopup");
+                const closeBtn = document.querySelector(".popup .close");
+
+                // Kontrol: daha önce izlendiyse açma
+                const isWatched = localStorage.getItem("popupWatched");
+
+                if (!isWatched) {
+                    popup.style.display = "block";
+                }
+
+                closeBtn.onclick = function () {
+                    popup.style.display = "none";
+                    localStorage.setItem("popupWatched", "true");
+                };
+
+                // Dışarı tıklayınca da kapanabilir istersen:
+                window.onclick = function (e) {
+                    if (e.target === popup) {
+                        popup.style.display = "none";
+                        localStorage.setItem("popupWatched", "true");
+                    }
+                };
+            });
         </script>
 
 

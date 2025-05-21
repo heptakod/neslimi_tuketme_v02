@@ -66,20 +66,20 @@ nav ul {
 .arama-kutusu {
     position: absolute;
     top: 10px;
-    left: 65px;
+    left: 750px;
     z-index: 5;
     display: flex;
     align-items: center;
     background-color: rgba(255, 255, 255, 0.95);
     border-radius: 50px;
     box-shadow: 0 4px 12px rgba(0, 106, 113, 0.15);
-    padding: 5px 8px;
+    padding: 2px 2px;
     backdrop-filter: blur(4px);
 }
 
     .arama-kutusu input {
         padding: 10px 16px;
-        width: 240px;
+        width: 400px;
         border: none;
         border-radius: 50px 0 0 50px;
         font-size: 12px;
@@ -256,4 +256,42 @@ turkiye_haritası img{
 .cards p {
     font-size: 1em;
     color: #444;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.popup-content {
+    position: relative;
+    margin: 10% auto;
+    padding: 0;
+    background-color: #fff;
+    width: 90%;
+    max-width: 700px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+    .popup-content video {
+        width: 100%;
+        display: block;
+    }
+
+.close {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+    z-index: 10;
+    cursor: pointer;
 }
