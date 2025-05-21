@@ -181,7 +181,7 @@ nav ul {
     text-align: center;
 }
 
-turkiye_haritası img{
+.turkiye_haritası img{
     align-items:center;
 }
 
@@ -190,6 +190,10 @@ turkiye_haritası img{
     color: #333;
     line-height: 1.6;
     text-align:center;
+}
+
+.turkiye_haritası {
+    text-align: center;
 }
 
 .intro {
