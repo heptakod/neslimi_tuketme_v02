@@ -1,16 +1,18 @@
 ﻿<!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8" />
     <title>Arama Sonuçları</title>
-    <link href="/css/geributonu.css" rel="stylesheet" />
+    <link href="../css/geributonu.css" rel="stylesheet" />
+    <link href="../../../css/spinner.css" rel="stylesheet" />
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
             background-color: #f9f9f9;
-        }
+            }
 
         h1 {
             text-align: center;
@@ -40,26 +42,26 @@
             overflow: visible;
         }
 
-            .animal-card img {
-                width: 250px;
-                height: 200px;
-                object-fit: cover;
-                border-top-left-radius: 16px;
-                border-top-right-radius: 16px;
-            }
+        .animal-card img {
+            width: 250px;
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: 16px;
+            border-top-right-radius: 16px;
+        }
 
-            .animal-card .info {
-                padding: 12px;
-            }
+        .animal-card .info {
+            padding: 12px;
+        }
 
-                .animal-card .info strong {
-                    display: block;
-                    font-size: 16px;
-                }
+        .animal-card .info strong {
+            display: block;
+            font-size: 16px;
+        }
 
-                .animal-card .info small {
-                    color: #666;
-                }
+        .animal-card .info small {
+            color: #666;
+        }
 
         .hazard-label {
             position: absolute;
@@ -78,14 +80,14 @@
             top: 210px;
             left: 0;
             width: 250px;
-            height:100px;
-            overflow-y:auto;
+            height: 100px;
+            overflow-y: auto;
             background-color: #ffd700;
             color: #333;
             padding: 12px;
             border-bottom-left-radius: 16px;
             border-bottom-right-radius: 16px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease;
@@ -110,10 +112,16 @@
         }
     </style>
 </head>
+
 <body>
     <a href="index.html" class="back-button">← Geri</a>
     <h1>Arama Sonuçları</h1>
     <div id="results"></div>
+
+    <div id="loading">
+        <div class="spinner"></div>
+        <!-- Yükleniyor... -->
+    </div>
 
     <script>
         const params = new URLSearchParams(window.location.search);
@@ -148,6 +156,9 @@
                         return false;
                     });
 
+                    const loading = document.getElementById("loading");
+                    loading.style.display = "none";
+
                     if (filtered.length === 0) {
                         resultsDiv.innerText = "Arama kriterlerinize uygun canlı bulunamadı.";
                     } else {
@@ -177,5 +188,5 @@
         }
     </script>
 </body>
-</html>
 
+</html>
