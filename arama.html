@@ -20,43 +20,44 @@
         } else {
             resultsDiv.innerText = `“${query}” için arama yapılıyor...`;
 
-            // Buraya veri kaynaklarını (API linklerini) ekle
+            // Sadece bir API ile başlıyoruz
             const apiLinks = [
-                // Bölge 1 Memeliler JSON API linki,
-                // Bölge 1 Kuşlar JSON API linki,
-                // ... diğer 7x13 API linkleri
+                "https://script.google.com/macros/s/AKfycbyhpVQ3QQN7JiNNkvHV7yVbUCAIQCAyaqXbRUJwsnw1LFuI-4ug7U4gXMwOHMjf1qds1g/exec"
             ];
 
             // API'den tüm verileri çek ve ara
             Promise.all(apiLinks.map(link => fetch(link).then(res => res.json())))
                 .then(allDataArrays => {
-                    // allDataArrays her API linkinden gelen array'lerin dizisi
-                    // Hepsini tek diziye birleştir
+                    // allDataArrays: her linkten gelen array'lerin dizisi (tek linkte bile dizi olur)
                     const allData = allDataArrays.flat();
 
-                    // Arama
+                    // Arama işlemi
                     const filtered = allData.filter(item => {
-                        // item.yayginIsim, item.latinceIsim, item.aciklama alanları olduğunu varsayıyoruz
-                        return (item.yayginIsim?.toLowerCase().includes(query) ||
+                        return (
+                            item.yayginIsim?.toLowerCase().includes(query) ||
                             item.latinceIsim?.toLowerCase().includes(query) ||
-                            item.aciklama?.toLowerCase().includes(query));
+                            item.aciklama?.toLowerCase().includes(query)
+                        );
                     });
 
+                    // Sonuçları yazdırma
                     if (filtered.length === 0) {
                         resultsDiv.innerText = "Arama kriterlerinize uygun canlı bulunamadı.";
                     } else {
-                        resultsDiv.innerHTML = '';
+                        resultsDiv.innerHTML = ''; // Önceki metni sil
                         filtered.forEach(canli => {
                             const card = document.createElement('div');
                             card.style.border = '1px solid #ccc';
                             card.style.margin = '10px';
                             card.style.padding = '10px';
+                            card.style.borderRadius = '10px';
+                            card.style.maxWidth = '400px';
 
                             card.innerHTML = `
-            <h3>${canli.yayginIsim} (${canli.latinceIsim})</h3>
-            <img src="${canli.foto}" alt="${canli.yayginIsim}" width="150" />
+            <h3>${canli.yayginIsim} <i>(${canli.latinceIsim})</i></h3>
+            <img src="${canli.foto}" alt="${canli.yayginIsim}" style="max-width: 100%; height: auto;" />
             <p>${canli.aciklama}</p>
-            <p><b>Tehlike Derecesi:</b> ${canli.tehlikeDerecesi}</p>
+            <p><strong>Tehlike Derecesi:</strong> ${canli.tehlikeDerecesi}</p>
           `;
 
                             resultsDiv.appendChild(card);
@@ -65,9 +66,10 @@
                 })
                 .catch(err => {
                     resultsDiv.innerText = "Veriler yüklenirken hata oluştu.";
-                    console.error(err);
+                    console.error("Hata:", err);
                 });
         }
+
 
     </script>
 
