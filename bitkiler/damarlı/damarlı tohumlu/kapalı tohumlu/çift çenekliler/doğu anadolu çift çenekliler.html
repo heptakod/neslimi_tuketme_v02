@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Doğu Anadolu'daki Nesli Tükenmekte Olan Damarlı Tohumsuz Bitkiler</title>
-    <link href="../../../css/liste.css" rel="stylesheet" />
+    <title>Doğu Anadolu'daki Nesli Tükenmekte Olan Çift Çenekli Bitkiler</title>
+    <link href="../../../../../css/liste.css" rel="stylesheet" />
 </head>
 
 
 <body>
     <a href="../../../bolgeler/akdeniz.html" class="back-button">← Geri</a>
 
-    <h1>Doğu Anadolu'daki Nesli Tükenmekte Olan Damarlı Tohumsuz Bitkiler</h1>
+    <h1>Doğu Anadolu'daki Nesli Tükenmekte Olan Çift Çenekli Bitkiler</h1>
     <div id="loading">
         <div class="spinner"></div>
         Yükleniyor...
@@ -53,7 +53,7 @@
 
 
     <script>
-        const sheetURL = "https://script.google.com/macros/s/AKfycbxjB__2cbJU83H4t61XnpRCizWzHkBqw09Hz9evOwJTE1lksUg3R_T-QF8lFAZzDn9z/exec";
+        const sheetURL = "https://script.google.com/macros/s/AKfycbwID1gCIUPkXnjf8OFT8Bjv2loOEICZnDTGzZzqWWxGhfOnwu3XLXtOtcRg9K9WvJxp/exec";
 
         fetch(sheetURL)
             .then(res => res.json())
@@ -69,17 +69,17 @@
                     card.setAttribute("data-name", animal.name);
 
                     card.innerHTML = `
-                                        <img src="${animal.image}" alt="${animal.name}">
-                                        <div class="hazard-label hazard-${animal["degree_of_hazard"]}">${animal["degree_of_hazard"]}</div>
-                                        <div class="info">
-                                          <strong>${animal.name}</strong>
-                                          <small>${animal.latin_name}</small>
-                                        </div>
-                                        <div class="info-bubble scroller">
-                                            <div class="bubble-content">${animal.description}</div>
-                                        </div>
-                                        <div class="info-bubble-pointer"></div>
-                                    `;
+                                            <img src="${animal.image}" alt="${animal.name}">
+                                            <div class="hazard-label hazard-${animal["degree_of_hazard"]}">${animal["degree_of_hazard"]}</div>
+                                            <div class="info">
+                                              <strong>${animal.name}</strong>
+                                              <small>${animal.latin_name}</small>
+                                            </div>
+                                            <div class="info-bubble scroller">
+                                                <div class="bubble-content">${animal.description}</div>
+                                            </div>
+                                            <div class="info-bubble-pointer"></div>
+                                        `;
 
                     card.addEventListener("click", function () {
                         document.querySelectorAll(".animal-card.active").forEach(c => {
@@ -124,3 +124,4 @@
 </body>
 
 </html>
+
