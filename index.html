@@ -32,7 +32,7 @@
     </header>
 
 
-    <div class="arama-kutusu">
+    <div class="arama-kutusu" style="margin-top: 100px;">
         <input id="searchInput"
                type="text"
                placeholder="Canlı adı, Latince adı veya açıklama..." />
@@ -116,27 +116,15 @@
         </map>
 
         <script>
-            function aramaYap() {
-                const input = document.getElementById("aramaInput").value.trim();
-
-                if (input === "") {
-                    alert("Lütfen bir isim girin.");
-                    return;
+        
+            function startSearch() {
+                const query = document.getElementById("searchInput").value.trim();
+                if (query) {
+                    window.location.href = `arama.html?q=${encodeURIComponent(query)}`;
+                } else {
+                    alert("Lütfen aramak istediğiniz kelimeyi girin.");
                 }
-
-                // Sorguyu URL'ye ekleyerek arama sonuçları sayfasına yönlendiriyoruz
-                window.location.href = `arama.html?query=${encodeURIComponent(input)}`;
             }
-            document.getElementById("aramaBtn").addEventListener("click", function () {
-                const aranan = document.getElementById("aramaInput").value.trim().toLowerCase();
-                if (!aranan) {
-                    alert("Lütfen bir isim girin.");
-                    return;
-                }
-
-                // Arama sayfasına yönlendirme
-                window.location.href = `arama.html?isim=${encodeURIComponent(aranan)}`;
-            });
         </script>
 
 
