@@ -1,75 +1,76 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <title>Canl� Arama Sonucu</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .card {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            max-width: 500px;
-            margin: 50px auto;
-            padding: 20px;
-        }
-
-            .card img {
-                max-width: 100%;
-                border-radius: 12px;
-                margin-bottom: 15px;
-            }
-
-        .not-found {
-            color: #777;
-            margin-top: 100px;
-            font-size: 1.2rem;
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <title>Arama Sonuçları</title>
 </head>
 <body>
-
-    <h2>Arama Sonucu</h2>
-
-    <div id="result"></div>
+    <h1>Arama Sonuçları</h1>
+    <div id="results"></div>
 
     <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const query = urlParams.get('query')?.toLowerCase().trim();
+        // URL'den arama kelimesini alıyoruz
+        const params = new URLSearchParams(window.location.search);
+        const query = params.get('q')?.toLowerCase();
 
-    if (!query) {
-        document.getElementById('result').innerHTML = "<p class='not-found'>Arama yap�lmad�.</p>";
-    } else {
-        fetch('https://script.google.com/macros/s/AKfycby3vNdMHW-afjVwMaCHDBRRrQA_zxKVW027pPvLUTY83DfK0U1c2b1f58DI2RCcyN_s/exec')
-            .then(res => res.json())
-            .then(data => {
-                const found = data.find(item => item.name.toLowerCase() === query);
+        const resultsDiv = document.getElementById('results');
 
-                if (found) {
-                    document.getElementById('result').innerHTML = `
-                        <div class="card">
-                            <img src="${found.image}" alt="${found.name}">
-                            <h2>${found.name}</h2>
-                            <h4><em>${found["latin name"]}</em></h4>
-                            <p>${found.description}</p>
-                        </div>
-                    `;
-                } else {
-                    document.getElementById('result').innerHTML = "<p class='not-found'>Arad���n�z canl� bulunamad�.</p>";
-                }
-            })
-            .catch(error => {
-                console.error("Hata olu�tu:", error);
-                document.getElementById('result').innerHTML = "<p class='not-found'>Veri al�namad�.</p>";
-            });
-    }
+        if (!query) {
+            resultsDiv.innerText = "Arama kelimesi bulunamadı.";
+        } else {
+            resultsDiv.innerText = `“${query}” için arama yapılıyor...`;
+
+            // Buraya veri kaynaklarını (API linklerini) ekle
+            const apiLinks = [
+                // Bölge 1 Memeliler JSON API linki,
+                // Bölge 1 Kuşlar JSON API linki,
+                // ... diğer 7x13 API linkleri
+            ];
+
+            // API'den tüm verileri çek ve ara
+            Promise.all(apiLinks.map(link => fetch(link).then(res => res.json())))
+                .then(allDataArrays => {
+                    // allDataArrays her API linkinden gelen array'lerin dizisi
+                    // Hepsini tek diziye birleştir
+                    const allData = allDataArrays.flat();
+
+                    // Arama
+                    const filtered = allData.filter(item => {
+                        // item.yayginIsim, item.latinceIsim, item.aciklama alanları olduğunu varsayıyoruz
+                        return (item.yayginIsim?.toLowerCase().includes(query) ||
+                            item.latinceIsim?.toLowerCase().includes(query) ||
+                            item.aciklama?.toLowerCase().includes(query));
+                    });
+
+                    if (filtered.length === 0) {
+                        resultsDiv.innerText = "Arama kriterlerinize uygun canlı bulunamadı.";
+                    } else {
+                        resultsDiv.innerHTML = '';
+                        filtered.forEach(canli => {
+                            const card = document.createElement('div');
+                            card.style.border = '1px solid #ccc';
+                            card.style.margin = '10px';
+                            card.style.padding = '10px';
+
+                            card.innerHTML = `
+            <h3>${canli.yayginIsim} (${canli.latinceIsim})</h3>
+            <img src="${canli.foto}" alt="${canli.yayginIsim}" width="150" />
+            <p>${canli.aciklama}</p>
+            <p><b>Tehlike Derecesi:</b> ${canli.tehlikeDerecesi}</p>
+          `;
+
+                            resultsDiv.appendChild(card);
+                        });
+                    }
+                })
+                .catch(err => {
+                    resultsDiv.innerText = "Veriler yüklenirken hata oluştu.";
+                    console.error(err);
+                });
+        }
+
     </script>
 
 </body>
 </html>
+
