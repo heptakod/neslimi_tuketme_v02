@@ -9,10 +9,8 @@
     <div id="results"></div>
 
     <script>
-        // URL'den arama kelimesini alıyoruz
         const params = new URLSearchParams(window.location.search);
         const query = params.get('q')?.toLowerCase();
-
         const resultsDiv = document.getElementById('results');
 
         if (!query) {
@@ -20,31 +18,26 @@
         } else {
             resultsDiv.innerText = `“${query}” için arama yapılıyor...`;
 
-            // Sadece bir API ile başlıyoruz
             const apiLinks = [
                 "https://script.google.com/macros/s/AKfycbyhpVQ3QQN7JiNNkvHV7yVbUCAIQCAyaqXbRUJwsnw1LFuI-4ug7U4gXMwOHMjf1qds1g/exec"
             ];
 
-            // API'den tüm verileri çek ve ara
             Promise.all(apiLinks.map(link => fetch(link).then(res => res.json())))
                 .then(allDataArrays => {
-                    // allDataArrays: her linkten gelen array'lerin dizisi (tek linkte bile dizi olur)
                     const allData = allDataArrays.flat();
 
-                    // Arama işlemi
                     const filtered = allData.filter(item => {
                         return (
-                            item.yayginIsim?.toLowerCase().includes(query) ||
-                            item.latinceIsim?.toLowerCase().includes(query) ||
-                            item.aciklama?.toLowerCase().includes(query)
+                            item.name?.toLowerCase().includes(query) ||
+                            item.latin_name?.toLowerCase().includes(query) ||
+                            item.description?.toLowerCase().includes(query)
                         );
                     });
 
-                    // Sonuçları yazdırma
                     if (filtered.length === 0) {
                         resultsDiv.innerText = "Arama kriterlerinize uygun canlı bulunamadı.";
                     } else {
-                        resultsDiv.innerHTML = ''; // Önceki metni sil
+                        resultsDiv.innerHTML = '';
                         filtered.forEach(canli => {
                             const card = document.createElement('div');
                             card.style.border = '1px solid #ccc';
@@ -54,10 +47,10 @@
                             card.style.maxWidth = '400px';
 
                             card.innerHTML = `
-            <h3>${canli.yayginIsim} <i>(${canli.latinceIsim})</i></h3>
-            <img src="${canli.foto}" alt="${canli.yayginIsim}" style="max-width: 100%; height: auto;" />
-            <p>${canli.aciklama}</p>
-            <p><strong>Tehlike Derecesi:</strong> ${canli.tehlikeDerecesi}</p>
+            <h3>${canli.name} <i>(${canli.latin_name})</i></h3>
+            <img src="${canli.image}" alt="${canli.name}" style="max-width: 100%; height: auto;" />
+            <p>${canli.description}</p>
+            <p><strong>Tehlike Derecesi:</strong> ${canli.degree_of_hazard}</p>
           `;
 
                             resultsDiv.appendChild(card);
@@ -69,6 +62,7 @@
                     console.error("Hata:", err);
                 });
         }
+
 
 
     </script>
