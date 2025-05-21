@@ -80,7 +80,7 @@
             resultsDiv.innerText = `“${query}” için arama yapılıyor...`;
 
             const apiLinks = [
-                "https://script.google.com/macros/s/AKfycbyZUF2aHHvKZAirNdoq0YaeqNDTd78xblXtv6eEHSSCJXqKgUbIercj34Me10V7NOdpCg/exec"
+                "https://script.google.com/macros/s/AKfycbwQHy9Q8f2mRHzMvNhz32AkqINSi2NNxcPARuc3xXVrqnDxmfHKClFrp-lvNOlS7Revuw/exec"
             ];
 
             Promise.all(apiLinks.map(link => fetch(link).then(res => res.json())))
