@@ -10,59 +10,6 @@ body {
     color: #006A71;
 }
 
-header {
-    position:fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #fff;
-    position: fixed;
-    padding: 10px 20px;
-    text-align: center;
-}
-
-    .logo-title{
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    header h1 {
-        margin-left: 10px;
-        font-size: 24px;
-        color: #536673; /* Renk paletinizden bir ton seçebilirsiniz */
-        text-align: left; /* Başlığı sola yaslamak */
-        ;
-    }
-
-    .logo-title img {
-        height: 40px;
-        width: auto;
-        margin-left: 80px;
-
-    }
-
-nav ul {
-    list-style: none;
-}
-
-    nav ul li {
-        display: inline-block;
-        margin-right: 20px;
-    }
-
-        nav ul li a {
-            color: #536673;
-            text-decoration: none;
-        }
-
-            nav ul li a:hover {
-                text-decoration: underline;
-            }
-
 .arama-kutusu {
     position: absolute;
     top: 10px;
@@ -181,7 +128,7 @@ nav ul {
     text-align: center;
 }
 
-turkiye_haritası img{
+.turkiye_haritası img{
     align-items:center;
 }
 
@@ -190,6 +137,10 @@ turkiye_haritası img{
     color: #333;
     line-height: 1.6;
     text-align:center;
+}
+
+.turkiye_haritası {
+    text-align: center;
 }
 
 .intro {

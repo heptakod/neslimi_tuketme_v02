@@ -7,10 +7,10 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #fff;
-    color: #006A71;
+    /* color: #006A71; */
 }
 
-header {
+/* header {
     position: fixed;
     top: 0;
     width: 100%;
@@ -22,7 +22,7 @@ header {
     position: fixed;
     padding: 10px 20px;
     text-align: center;
-}
+} */
 
 .overlay.header-strip {
     background: rgba(0, 0, 0, 0.0);
@@ -64,46 +64,7 @@ header {
     }
 }
 
-.logo-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
 
-header h1 {
-    margin-left: 10px;
-    font-size: 24px;
-    color: #536673;
-    /* Renk paletinizden bir ton se�ebilirsiniz */
-    text-align: left;
-    /* Ba�l��� sola yaslamak */
-    ;
-}
-
-.logo-title img {
-    height: 40px;
-    width: auto;
-    margin-left: 80px;
-
-}
-
-nav ul {
-    list-style: none;
-}
-
-nav ul li {
-    display: inline-block;
-    margin-right: 20px;
-}
-
-nav ul li a {
-    color: #536673;
-    text-decoration: none;
-}
-
-nav ul li a:hover {
-    text-decoration: underline;
-}
 
 .arama-kutusu {
     max-width: 800px;

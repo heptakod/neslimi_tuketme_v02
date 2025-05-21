@@ -1,27 +1,6 @@
 <!DOCTYPE html>
 <html lang="tr">
 
-<header>
-
-    <div class="logo-title">
-        <img src="../img/caretta.png" alt="Logo">
-        <h1>Neslimi Tüketme</h1>
-    </div>
-
-
-    <nav>
-        <ul>
-            <li> <a href="../index.html">Anasayfa</a> </li>
-            <li> <a href="marmara.html">Marmara</a> </li>
-            <li> <a href="ege.html">Ege</a> </li>
-            <li> <a href="akdeniz.html">Akdeniz</a> </li>
-            <li> <a href="karadeniz.html">Karadeniz</a> </li>
-            <li> <a href="ic anadolu.html">İç Anadolu</a> </li>
-            <li> <a href="guneydogu anadolu.html">Güneydoğu Anadolu</a> </li>
-            <li> <a href="dogu anadolu.html">Doğu Anadolu</a> </li>
-        </ul>
-    </nav>
-</header>
 
 <head>
     <meta charset="UTF-8">
@@ -29,6 +8,16 @@
     <title>Güneydoğu Anadolu Bölgesi'ndeki Nesli Tükenmekte Olan Canlılar</title>
     <link href="../css/bolgeler.css" rel="stylesheet" />
     <link rel="icon" href="../img/caretta.png" type="image/png" />
+    <link href="/css/header.css" rel="stylesheet" />
+    <style>
+        /* Specific active header colors */
+        .active {
+            background-color:  rgba(164, 0, 0, 0.4)
+        }
+        .active a {
+            color:rgb(51, 3, 3);
+        }
+    </style>
 
     <style>
         .hero-text h1 {
@@ -45,6 +34,27 @@
     </style>
 </head>
 <body>
+    <header>
+
+        <div class="logo-title">
+            <img src="../img/caretta.png" alt="Logo">
+            <h1>Neslimi Tüketme</h1>
+        </div>
+
+
+        <nav>
+            <ul>
+                <li> <a href="../index.html">Anasayfa</a> </li>
+                <li> <a href="marmara.html">Marmara</a> </li>
+                <li> <a href="ege.html">Ege</a> </li>
+                <li> <a href="akdeniz.html">Akdeniz</a> </li>
+                <li> <a href="karadeniz.html">Karadeniz</a> </li>
+                <li> <a href="ic anadolu.html">İç Anadolu</a> </li>
+                <li class="active"> <a href="guneydogu anadolu.html">Güneydoğu Anadolu</a> </li>
+                <li> <a href="dogu anadolu.html">Doğu Anadolu</a> </li>
+            </ul>
+        </nav>
+    </header>
 
     <div class="hero">
         <img src="../img/guneydoguanadolu.jpg" alt="Hero">

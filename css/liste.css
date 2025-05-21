@@ -65,9 +65,9 @@
 
 }
 
-        /* .animal-card:hover {
+        .animal-card:hover {
             transform: translateY(-4px);
-        } */
+        }
 
         .animal-card img {
             width: 250px;
