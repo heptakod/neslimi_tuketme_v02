@@ -164,8 +164,8 @@
                 const popup = document.getElementById("videoPopup");
                 const closeBtn = document.querySelector(".popup .close");
 
-                // Kontrol: daha önce izlendiyse açma
-                const isWatched = localStorage.getItem("popupWatched");
+                // Oturumda daha önce izlendi mi kontrol et
+                const isWatched = sessionStorage.getItem("popupWatched");
 
                 if (!isWatched) {
                     popup.style.display = "block";
@@ -173,17 +173,17 @@
 
                 closeBtn.onclick = function () {
                     popup.style.display = "none";
-                    localStorage.setItem("popupWatched", "true");
+                    sessionStorage.setItem("popupWatched", "true");
                 };
 
-                // Dışarı tıklayınca da kapanabilir istersen:
                 window.onclick = function (e) {
                     if (e.target === popup) {
                         popup.style.display = "none";
-                        localStorage.setItem("popupWatched", "true");
+                        sessionStorage.setItem("popupWatched", "true");
                     }
                 };
             });
+
         </script>
 
 
