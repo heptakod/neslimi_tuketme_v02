@@ -7,12 +7,13 @@
     <link href="../css/geributonu.css" rel="stylesheet" />
     <link href="../../../css/spinner.css" rel="stylesheet" />
     <style>
+        /* CSS'n burada aynı şekilde kalacak */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
             background-color: #f9f9f9;
-            }
+        }
 
         h1 {
             text-align: center;
@@ -42,26 +43,26 @@
             overflow: visible;
         }
 
-        .animal-card img {
-            width: 250px;
-            height: 200px;
-            object-fit: cover;
-            border-top-left-radius: 16px;
-            border-top-right-radius: 16px;
-        }
+            .animal-card img {
+                width: 250px;
+                height: 200px;
+                object-fit: cover;
+                border-top-left-radius: 16px;
+                border-top-right-radius: 16px;
+            }
 
-        .animal-card .info {
-            padding: 12px;
-        }
+            .animal-card .info {
+                padding: 12px;
+            }
 
-        .animal-card .info strong {
-            display: block;
-            font-size: 16px;
-        }
+                .animal-card .info strong {
+                    display: block;
+                    font-size: 16px;
+                }
 
-        .animal-card .info small {
-            color: #666;
-        }
+                .animal-card .info small {
+                    color: #666;
+                }
 
         .hazard-label {
             position: absolute;
@@ -127,36 +128,46 @@
         const params = new URLSearchParams(window.location.search);
         const query = params.get('q')?.toLowerCase();
         const resultsDiv = document.getElementById('results');
+        const loading = document.getElementById("loading");
 
         if (!query) {
             resultsDiv.innerText = "Arama kelimesi bulunamadı.";
+            loading.style.display = "none";
         } else {
             resultsDiv.innerText = `“${query}” için arama yapılıyor...`;
 
+            // Tüm bölge API linklerin:
             const apiLinks = [
-                "https://script.google.com/macros/s/AKfycbwQHy9Q8f2mRHzMvNhz32AkqINSi2NNxcPARuc3xXVrqnDxmfHKClFrp-lvNOlS7Revuw/exec"
+                "https://script.google.com/macros/s/AKfycbwpwEa9OQzyNXFwNkpA9BdV1mEvTlsBYv_9xyblpB9nzD39K7OO8wbmv2fwtbbxWJvFxw/exec", // Marmara
+                "https://script.google.com/macros/s/AKfycbwFQ3q9TmZnf-LFH__UI4KmZ9-Y7KdqpBRmnFyXnis7z5bjLHGGsNhnBh8KeR4j50_MGw/exec", // Ege
+                "https://script.google.com/macros/s/AKfycbxUQmomytsNU2cn4l7Kqrm4UHu0ngg__2i2_de4UZeURh3vhZlUURdnNT2yw537o15QMg/exec", // Karadeniz
+                "https://script.google.com/macros/s/AKfycbxFxXD3ixoZRUJU783bx40n9PS2rJmYiQD_UXNQbXpKQ_NacrEkiS0ZVtyY6e_919bZtQ/exec", // Akdeniz
+                "https://script.google.com/macros/s/AKfycbwWcEeVU8UqXL1UwZYMI3CDEJOr_C35oot3D5J46ybHQjBQ3ayprkiEJntgzRVQFysK/exec", // Güneydoğu Anadolu
+                "https://script.google.com/macros/s/AKfycbxDDdb8_4XKG7JYO4R1ICLiR-PYS5wIaJBrxdifu1az1EQDbF7fK-Xt7niVDCC6qbCOTA/exec", // İç Anadolu
+                "https://script.google.com/macros/s/AKfycbx1sEc3FaVHk3f2tnPf_-hGwSm-EQURNba7V1GGMI_JyAkAGi675yq54-zlms4JORQCZw/exec"  // Doğu Anadolu
             ];
 
+            // Tüm API’lerden veriyi paralel çek:
             Promise.all(apiLinks.map(link => fetch(link).then(res => res.json())))
                 .then(allDataArrays => {
+                    // Tüm veriyi tek array yap
                     const allData = allDataArrays.flat();
 
-                    // Aynı isme sahip canlıları sadece bir kez göster
+                    // Aynı isimde olanları bir kez göster:
                     const seenNames = new Set();
                     const filtered = allData.filter(item => {
-                        const matches = (
+                        const match = (
                             item.name?.toLowerCase().includes(query) ||
                             item.latin_name?.toLowerCase().includes(query) ||
                             item.description?.toLowerCase().includes(query)
                         );
-                        if (matches && !seenNames.has(item.name)) {
+                        if (match && !seenNames.has(item.name)) {
                             seenNames.add(item.name);
                             return true;
                         }
                         return false;
                     });
 
-                    const loading = document.getElementById("loading");
                     loading.style.display = "none";
 
                     if (filtered.length === 0) {
@@ -168,20 +179,20 @@
                             card.className = 'animal-card';
 
                             card.innerHTML = `
-                    <img src="${canli.image}" alt="${canli.name}" />
-                    <div class="description">${canli.description}</div>
-                    <div class="info">
-                      <strong>${canli.name}</strong>
-                      <small><i>${canli.latin_name}</i></small>
-                      <div class="hazard-label">${canli.degree_of_hazard}</div>
-                    </div>
-                  `;
-
+                                    <img src="${canli.image}" alt="${canli.name}" />
+                                    <div class="description">${canli.description}</div>
+                                    <div class="info">
+                                      <strong>${canli.name}</strong>
+                                      <small><i>${canli.latin_name}</i></small>
+                                      <div class="hazard-label">${canli.degree_of_hazard}</div>
+                                    </div>
+                                `;
                             resultsDiv.appendChild(card);
                         });
                     }
                 })
                 .catch(err => {
+                    loading.style.display = "none";
                     resultsDiv.innerText = "Veriler yüklenirken hata oluştu.";
                     console.error("Hata:", err);
                 });
