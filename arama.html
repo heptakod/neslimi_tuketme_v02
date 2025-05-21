@@ -69,78 +69,75 @@
     <div id="results"></div>
 
     <script>
-        <script>
-            const params = new URLSearchParams(window.location.search);
-            const query = params.get('q')?.toLowerCase();
-            const resultsDiv = document.getElementById('results');
 
-            if (!query) {
-                resultsDiv.innerText = "Arama kelimesi bulunamadı.";
-       } else {
-                resultsDiv.innerText = `“${query}” için arama yapılıyor...`;
+        const params = new URLSearchParams(window.location.search);
+        const query = params.get('q')?.toLowerCase();
+        const resultsDiv = document.getElementById('results');
+
+        if (!query) {
+            resultsDiv.innerText = "Arama kelimesi bulunamadı.";
+        } else {
+            resultsDiv.innerText = `“${query}” için arama yapılıyor...`;
 
             const apiLinks = [
-            "https://script.google.com/macros/s/AKfycbyZUF2aHHvKZAirNdoq0YaeqNDTd78xblXtv6eEHSSCJXqKgUbIercj34Me10V7NOdpCg/exec"
+                "https://script.google.com/macros/s/AKfycbyZUF2aHHvKZAirNdoq0YaeqNDTd78xblXtv6eEHSSCJXqKgUbIercj34Me10V7NOdpCg/exec"
             ];
 
-           Promise.all(apiLinks.map(link => fetch(link).then(res => res.json())))
-               .then(allDataArrays => {
-                   const allData = allDataArrays.flat();
+            Promise.all(apiLinks.map(link => fetch(link).then(res => res.json())))
+                .then(allDataArrays => {
+                    const allData = allDataArrays.flat();
 
-                   // Arama sonuçlarını filtrele
-                   const filtered = allData.filter(item => {
-                       return (
-            item.name?.toLowerCase().includes(query) ||
-            item.latin_name?.toLowerCase().includes(query) ||
-            item.description?.toLowerCase().includes(query)
-            );
-                   });
+                    // Arama sonuçlarını filtrele
+                    const filtered = allData.filter(item => {
+                        return (
+                            item.name?.toLowerCase().includes(query) ||
+                            item.latin_name?.toLowerCase().includes(query) ||
+                            item.description?.toLowerCase().includes(query)
+                        );
+                    });
 
-            // Aynı canlıyı tekrar göstermemek için filtrele
-            const seen = new Set();
-                   const uniqueFiltered = filtered.filter(item => {
-                       const key = `${item.name}-${item.latin_name}`;
-            if (seen.has(key)) {
-                           return false;
-                       } else {
-                seen.add(key);
-            return true;
-                       }
-                   });
+                    // Aynı canlıyı tekrar göstermemek için filtrele
+                    const seen = new Set();
+                    const uniqueFiltered = filtered.filter(item => {
+                        const key = `${item.name}-${item.latin_name}`;
+                        if (seen.has(key)) {
+                            return false;
+                        } else {
+                            seen.add(key);
+                            return true;
+                        }
+                    });
 
-            // Sonuçları göster
-            if (uniqueFiltered.length === 0) {
-                resultsDiv.innerText = "Arama kriterlerinize uygun canlı bulunamadı.";
-                   } else {
-                resultsDiv.innerHTML = '';
-                       uniqueFiltered.forEach(canli => {
-                           const card = document.createElement('div');
-            card.className = 'result-card';
-            card.style.border = '1px solid #ccc';
-            card.style.margin = '10px';
-            card.style.padding = '10px';
-            card.style.borderRadius = '10px';
-            card.style.maxWidth = '400px';
+                    // Sonuçları göster
+                    if (uniqueFiltered.length === 0) {
+                        resultsDiv.innerText = "Arama kriterlerinize uygun canlı bulunamadı.";
+                    } else {
+                        resultsDiv.innerHTML = '';
+                        uniqueFiltered.forEach(canli => {
+                            const card = document.createElement('div');
+                            card.className = 'result-card';
+                            card.style.border = '1px solid #ccc';
+                            card.style.margin = '10px';
+                            card.style.padding = '10px';
+                            card.style.borderRadius = '10px';
+                            card.style.maxWidth = '400px';
 
-            card.innerHTML = `
-            <h3>${canli.name} <i>(${canli.latin_name})</i></h3>
-            <img src="${canli.image}" alt="${canli.name}" style="max-width: 100%; height: auto;" />
-            <p>${canli.description}</p>
-            <p><strong>Tehlike Derecesi:</strong> ${canli.degree_of_hazard}</p>
-            `;
+                            card.innerHTML = `
+                           <h3>${canli.name} <i>(${canli.latin_name})</i></h3>
+                           <img src="${canli.image}" alt="${canli.name}" style="max-width: 100%; height: auto;" />
+                           <p>${canli.description}</p>
+                           <p><strong>Tehlike Derecesi:</strong> ${canli.degree_of_hazard}</p>
+                       `;
 
-            resultsDiv.appendChild(card);
-                       });
-                   }
-               })
-               .catch(err => {
-                resultsDiv.innerText = "Veriler yüklenirken hata oluştu.";
-            console.error("Hata:", err);
-               });
-       }
-    </script>
-
-
+                            resultsDiv.appendChild(card);
+                        });
+                    }
+                })
+                .catch(err => {
+                    resultsDiv.innerText = "Veriler yüklenirken hata oluştu.";
+                    console.error("Hata:", err);
+                });
+        }
     </script>
 
 </body>
